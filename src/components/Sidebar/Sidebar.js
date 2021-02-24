@@ -2,13 +2,22 @@ import React from "react";
 import styled from "styled-components";
 
 import { sidebarItemsData } from "../../data/SidebarData";
-import { ChannelsItemsData } from "../../data/CustomChannels";
+import db from "../../firebase";
 
 // Icons
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import AddIcon from "@material-ui/icons/Add";
 
-function Sidebar() {
+function Sidebar(props) {
+  const addChannel = () => {
+    const newChannelName = prompt("Enter channel name:");
+    if (newChannelName) {
+      db.collection("rooms").add({ name: newChannelName });
+    } else {
+      alert("Channel name is invalid.");
+    }
+  };
+
   return (
     <Container>
       <WorkspaceContainer>
@@ -28,11 +37,11 @@ function Sidebar() {
       <ChannelsContainer>
         <NewChannelsContainer>
           <div>Channels</div>
-          <AddIcon />
+          <AddIcon onClick={addChannel} />
         </NewChannelsContainer>
         <ChannelsList>
-          {ChannelsItemsData.map((item) => (
-            <Channel>{item.name}</Channel>
+          {props.rooms.map((room) => (
+            <Channel># {room.name}</Channel>
           ))}
         </ChannelsList>
       </ChannelsContainer>
@@ -54,7 +63,7 @@ const WorkspaceContainer = styled.div`
   align-items: center;
   padding-left: 19px;
   justify-content: space-between;
-  border-bottom: 1px solid #ee254f;
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
 `;
 
 const Name = styled.div``;
@@ -80,7 +89,7 @@ const MainChannelItem = styled.div`
   grid-template-columns: 15% auto;
   height: 28px;
   align-items: center;
-  padding-left: 19px;
+  padding: 5px 0 5px 19px;
   cursor: pointer;
   :hover {
     background: #ee254f;

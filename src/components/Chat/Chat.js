@@ -1,24 +1,31 @@
 import React from "react";
 import styled from "styled-components";
 
+import ChatInput from "./ChatInput/ChatInput";
+import ChatMessage from "./ChatMessage/ChatMessage";
+
 // Icons
-import StarOutlineRoundedIcon from "@material-ui/icons/StarOutlineRounded";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 
 function Chat() {
   return (
     <Container>
       <Header>
-        <ChannelInfo>
-          <ChannelName>#slack-clone</ChannelName>
-          <StarOutlineRoundedIcon></StarOutlineRoundedIcon>
-          <ChannelTopic>Hello slack!</ChannelTopic>
-        </ChannelInfo>
-        <Details>
+        <Channel>
+          <ChannelName># slack-clone</ChannelName>
+          <ChannelInfo>
+            Company-wide announcements and work-based matters
+          </ChannelInfo>
+        </Channel>
+        <ChannelDetails>
           <p>Details</p>
-          <InfoOutlinedIcon />
-        </Details>
+          <DetailIcon />
+        </ChannelDetails>
       </Header>
+      <MessageContainer>
+        <ChatMessage />
+      </MessageContainer>
+      <ChatInput />
     </Container>
   );
 }
@@ -28,36 +35,38 @@ export default Chat;
 const Container = styled.div`
   background: #1f1e24;
   display: grid;
-  grid-template-rows: 65px auto;
+  grid-template-rows: 65px auto min-content;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #ee254f;
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
   align-items: center;
   padding: 0 20px;
   color: #fff;
 `;
 
-const ChannelInfo = styled.div`
-  display: grid;
-  grid-template-columns: 100px 10px;
-  grid-template-rows: 20px 20px;
-`;
+const Channel = styled.div``;
 
 const ChannelName = styled.div`
-  font-weight: bold;
+  font-weight: 700;
 `;
 
-const ChannelTopic = styled.div`
+const ChannelInfo = styled.div`
+  color: #9fa3a5;
+  font-weight: 400;
+  font-size: 13px;
+`;
+
+const ChannelDetails = styled.div`
+  display: flex;
+  align-items: center;
   color: #9fa3a5;
 `;
 
-const Details = styled.div`
-  display: flex;
-  align-items: center;
-  p {
-    padding-right: 10px;
-  }
+const DetailIcon = styled(InfoOutlinedIcon)`
+  padding-left: 10px;
 `;
+
+const MessageContainer = styled.div``;
