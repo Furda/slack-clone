@@ -30,7 +30,7 @@ function Header() {
 export default Header;
 
 const Container = styled.div`
-  background: #350d36;
+  background: #11141d;
   color: white;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@ const SearchContainer = styled.div`
 `;
 
 const Search = styled.div`
-  box-shadow: inset 0 0 0 1px rgb(104 74 104);
+  box-shadow: inset 0 0 0 1px #ee254f;
   width: 100%;
   border-radius: 6px;
   display: flex;

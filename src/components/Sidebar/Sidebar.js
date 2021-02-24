@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { sidebarItemsData } from "../../data/SidebarData";
+import { ChannelsItemsData } from "../../data/CustomChannels";
 
 // Icons
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -30,8 +31,9 @@ function Sidebar() {
           <AddIcon />
         </NewChannelsContainer>
         <ChannelsList>
-          <Channel>#Channel 1</Channel>
-          <Channel>#Channel 2</Channel>
+          {ChannelsItemsData.map((item) => (
+            <Channel>{item.name}</Channel>
+          ))}
         </ChannelsList>
       </ChannelsContainer>
     </Container>
@@ -42,7 +44,7 @@ export default Sidebar;
 
 // Styles
 const Container = styled.div`
-  background: #350d38;
+  background: #28272d;
 `;
 
 const WorkspaceContainer = styled.div`
@@ -52,7 +54,7 @@ const WorkspaceContainer = styled.div`
   align-items: center;
   padding-left: 19px;
   justify-content: space-between;
-  border-bottom: 1px solid #532753;
+  border-bottom: 1px solid #ee254f;
 `;
 
 const Name = styled.div``;
@@ -61,8 +63,7 @@ const NewMessage = styled.div`
   width: 36px;
   height: 36px;
   background-color: white;
-  color: #3f0e40;
-  fill: #3f0e40;
+  color: #28272d;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,20 +75,20 @@ const NewMessage = styled.div`
 const MainChannels = styled.div``;
 
 const MainChannelItem = styled.div`
-  color: rgb(188, 171, 199);
+  color: #9fa3a5;
   display: grid;
   grid-template-columns: 15% auto;
   height: 28px;
   align-items: center;
   padding-left: 19px;
   cursor: pointer;
-  &:hover {
-    background: #350d36;
+  :hover {
+    background: #ee254f;
   }
 `;
 
 const ChannelsContainer = styled.div`
-  color: rgb(188, 171, 199);
+  color: #9fa3a5;
   margin-top: 10px;
 `;
 
@@ -109,6 +110,6 @@ const Channel = styled.div`
   padding-left: 19px;
   cursor: pointer;
   :hover {
-    background: #350d36;
+    background: #ee254f;
   }
 `;
