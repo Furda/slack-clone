@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 // Icons
-import SendIcon from "@material-ui/icons/Send";
+import SendRoundedIcon from "@material-ui/icons/SendRounded";
 
 function ChatInput() {
   return (
@@ -65,7 +65,7 @@ const SendButton = styled.div`
   }
 `;
 
-const Send = styled(SendIcon)`
+const Send = styled(SendRoundedIcon)`
   color: #fff;
   :hover {
     color: #ee254f;
