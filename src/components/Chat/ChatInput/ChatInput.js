@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 // Icons
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
+import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
+import AttachFileIcon from "@material-ui/icons/AttachFile";
 
 function ChatInput() {
   return (
@@ -14,6 +16,14 @@ function ChatInput() {
             <Send />
           </SendButton>
         </form>
+        <InputOptions>
+          <OptionIcon>
+            <InsertEmoticonIcon />
+          </OptionIcon>
+          <OptionIcon>
+            <AttachFileIcon />
+          </OptionIcon>
+        </InputOptions>
       </InputContainer>
     </Container>
   );
@@ -69,5 +79,23 @@ const Send = styled(SendRoundedIcon)`
   color: #fff;
   :hover {
     color: #ee254f;
+  }
+`;
+
+const InputOptions = styled.div`
+  color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 1px solid #ee254f;
+`;
+
+const OptionIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  :hover {
+    background: #ee254f;
+    cursor: pointer;
   }
 `;
