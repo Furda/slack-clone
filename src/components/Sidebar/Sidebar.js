@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 import { sidebarItemsData } from "../../data/SidebarData";
 import db from "../../firebase";
@@ -9,6 +10,13 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import AddIcon from "@material-ui/icons/Add";
 
 function Sidebar(props) {
+  const history = useHistory();
+  const goToChannel = (id) => {
+    if (id) {
+      history.push(`/room/${id}`);
+    }
+  };
+
   const addChannel = () => {
     const newChannelName = prompt("Enter channel name:");
     if (newChannelName) {
@@ -41,7 +49,9 @@ function Sidebar(props) {
         </NewChannelsContainer>
         <ChannelsList>
           {props.rooms.map((room) => (
-            <Channel># {room.name}</Channel>
+            <Channel onClick={() => goToChannel(room.id)}>
+              # {room.name}
+            </Channel>
           ))}
         </ChannelsList>
       </ChannelsContainer>
@@ -79,6 +89,12 @@ const NewMessage = styled.div`
   border-radius: 50%;
   margin-right: 20px;
   cursor: pointer;
+  :hover {
+    background-color: #ee254f;
+    .MuiSvgIcon-root {
+      fill: white;
+    }
+  }
 `;
 
 const MainChannels = styled.div``;

@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-function ChatMessage() {
+function ChatMessage({ text, name, image, timestamp }) {
   return (
     <Container>
       <UserAvatar>
-        <img src="https://randomuser.me/api/portraits/women/91.jpg" />
+        <img src={image} alt="User" />
       </UserAvatar>
       <MessageContent>
         <Name>
-          Fernando Urdaneta
-          <span>10/10/1999 11:35 PM</span>
+          {name}
+          <span>{new Date(timestamp.toDate()).toUTCString()}</span>
         </Name>
-        <Text>Slack Clone</Text>
+        <Text>{text}</Text>
       </MessageContent>
     </Container>
   );

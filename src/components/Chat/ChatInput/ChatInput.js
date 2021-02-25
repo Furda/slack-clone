@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 // Icons
@@ -6,14 +6,26 @@ import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 
-function ChatInput() {
+function ChatInput(props) {
+  const [input, setInput] = useState("");
+  const send = (e) => {
+    e.preventDefault();
+    props.sendMessage(input);
+    setInput("");
+  };
+
   return (
     <Container>
       <InputContainer>
         <form>
-          <input type="text" placeholder="Message here..." />
+          <input
+            type="text"
+            placeholder="Message here..."
+            onChange={(e) => setInput(e.target.value)}
+            value={input}
+          />
           <SendButton>
-            <Send />
+            <Send type="submit" onClick={send} />
           </SendButton>
         </form>
         <InputOptions>
