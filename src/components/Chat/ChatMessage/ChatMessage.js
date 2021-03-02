@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 function ChatMessage({ text, name, image, timestamp }) {
+  image = image ? image : "https://i.imgur.com/6VBx3io.png";
+
   return (
     <Container>
       <UserAvatar>

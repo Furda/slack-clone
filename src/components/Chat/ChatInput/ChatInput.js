@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 
 // Icons
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
@@ -8,11 +10,30 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 
 function ChatInput(props) {
   const [input, setInput] = useState("");
+  const [emojiPickerState, SetEmojiPickerState] = useState(false);
+
   const send = (e) => {
     e.preventDefault();
     props.sendMessage(input);
     setInput("");
   };
+
+  const toggleEmojis = (e) => {
+    e.preventDefault();
+    SetEmojiPickerState(!emojiPickerState);
+  };
+
+  let emojiPicker;
+  if (emojiPickerState) {
+    emojiPicker = (
+      <Picker
+        style={pickerStyles}
+        title="Pick your emoji…"
+        emoji="point_up"
+        onSelect={(emoji) => setInput(input + emoji.native)}
+      />
+    );
+  }
 
   return (
     <Container>
@@ -29,8 +50,9 @@ function ChatInput(props) {
           </SendButton>
         </form>
         <InputOptions>
+          {emojiPicker}
           <OptionIcon>
-            <InsertEmoticonIcon />
+            <InsertEmoticonIcon onClick={toggleEmojis} />
           </OptionIcon>
           <OptionIcon>
             <AttachFileIcon />
@@ -111,3 +133,11 @@ const OptionIcon = styled.div`
     cursor: pointer;
   }
 `;
+
+const pickerStyles = {
+  position: "absolute",
+  bottom: 60,
+  right: 0,
+  cssFloat: "right",
+  marginLeft: "200px",
+};

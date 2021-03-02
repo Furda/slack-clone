@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-import { sidebarItemsData } from "../../data/SidebarData";
 import db from "../../firebase";
 
 // Icons
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import AddIcon from "@material-ui/icons/Add";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 function Sidebar(props) {
   const history = useHistory();
+
   const goToChannel = (id) => {
     if (id) {
       history.push(`/room/${id}`);
@@ -26,33 +26,36 @@ function Sidebar(props) {
     }
   };
 
+  const deleteChannel = (id) => {
+    if (id) {
+      db.collection("rooms")
+        .doc(id)
+        .delete()
+        .then(() => {
+          history.replace(`/`);
+        });
+    }
+  };
+
   return (
     <Container>
       <WorkspaceContainer>
-        <Name>CleverProgrammer</Name>
-        <NewMessage>
-          <AddCircleOutlineIcon />
-        </NewMessage>
+        <WorkspaceName>Slack Clone App</WorkspaceName>
       </WorkspaceContainer>
-      <MainChannels>
-        {sidebarItemsData.map((item) => (
-          <MainChannelItem>
-            {item.icon}
-            {item.text}
-          </MainChannelItem>
-        ))}
-      </MainChannels>
       <ChannelsContainer>
         <NewChannelsContainer>
           <div>Channels</div>
-          <AddIcon onClick={addChannel} />
+          <NewChannelIcon onClick={addChannel} />
         </NewChannelsContainer>
         <ChannelsList>
-          {props.rooms.map((room) => (
-            <Channel onClick={() => goToChannel(room.id)}>
-              # {room.name}
-            </Channel>
-          ))}
+          {props.rooms.map((room) => {
+            return (
+              <Channel key={room.id} onClick={() => goToChannel(room.id)}>
+                <ChannelName># {room.name}</ChannelName>
+                <DeleteChannelIcon onClick={() => deleteChannel(room.id)} />
+              </Channel>
+            );
+          })}
         </ChannelsList>
       </ChannelsContainer>
     </Container>
@@ -71,46 +74,12 @@ const WorkspaceContainer = styled.div`
   height: 64px;
   display: flex;
   align-items: center;
-  padding-left: 19px;
-  justify-content: space-between;
+  font-size: 20px;
+  justify-content: center;
   border-bottom: 1px solid rgb(255 255 255 / 10%);
 `;
 
-const Name = styled.div``;
-
-const NewMessage = styled.div`
-  width: 36px;
-  height: 36px;
-  background-color: white;
-  color: #28272d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  margin-right: 20px;
-  cursor: pointer;
-  :hover {
-    background-color: #ee254f;
-    .MuiSvgIcon-root {
-      fill: white;
-    }
-  }
-`;
-
-const MainChannels = styled.div``;
-
-const MainChannelItem = styled.div`
-  color: #9fa3a5;
-  display: grid;
-  grid-template-columns: 15% auto;
-  height: 28px;
-  align-items: center;
-  padding: 5px 0 5px 19px;
-  cursor: pointer;
-  :hover {
-    background: #ee254f;
-  }
-`;
+const WorkspaceName = styled.div``;
 
 const ChannelsContainer = styled.div`
   color: #9fa3a5;
@@ -126,15 +95,36 @@ const NewChannelsContainer = styled.div`
   padding-right: 12px;
 `;
 
+const NewChannelIcon = styled(AddCircleOutlineIcon)`
+  cursor: pointer;
+  :hover {
+    color: #ee254f;
+  }
+`;
+
 const ChannelsList = styled.div``;
 
 const Channel = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 12px 4px 0;
+  cursor: pointer;
+  :hover {
+    background: #ee254f;
+  }
+`;
+
+const ChannelName = styled.div`
   height: 28px;
   display: flex;
   align-items: center;
   padding-left: 19px;
+`;
+
+const DeleteChannelIcon = styled(DeleteIcon)`
   cursor: pointer;
   :hover {
-    background: #ee254f;
+    color: #fff;
   }
 `;

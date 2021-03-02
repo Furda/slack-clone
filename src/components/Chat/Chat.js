@@ -56,7 +56,7 @@ function Chat(props) {
       <Header>
         <Channel>
           <ChannelName># {channel && channel.name}</ChannelName>
-          <ChannelInfo>{channel.description}</ChannelInfo>
+          <ChannelInfo>{channel && channel.description}</ChannelInfo>
         </Channel>
         <ChannelDetails>
           <p>Details</p>

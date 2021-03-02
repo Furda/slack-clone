@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 import Chat from "./components/Chat/Chat";
 import Login from "./components/Login/Login";
+import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import db, { auth } from "./firebase";
@@ -54,7 +55,7 @@ function App() {
                 <Route path="/room/:channelId">
                   <Chat user={user} />
                 </Route>
-                <Route path="/">Select or create channel</Route>
+                <Route path="/" component={Home} />
               </Switch>
             </Main>
           </Container>
