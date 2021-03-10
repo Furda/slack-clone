@@ -9,13 +9,13 @@ function Header(props) {
   return (
     <Container>
       <Main>
-        <AccessTimeIcon />
+        <AccessIcon />
         <SearchContainer>
           <Search>
             <input type="text" placeholder="Search..." />
           </Search>
         </SearchContainer>
-        <HelpOutlineIcon />
+        <HelpIcon />
       </Main>
       <UserContainer>
         <Name>{props.user.name}</Name>
@@ -49,6 +49,14 @@ const Container = styled.div`
 const Main = styled.div`
   display: flex;
   margin: 0 16px;
+  align-items: center;
+`;
+
+const AccessIcon = styled(AccessTimeIcon)`
+  cursor: pointer;
+  :hover {
+    color: #ee254f;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -71,6 +79,13 @@ const Search = styled.div`
   }
   input:focus {
     outline: none;
+  }
+`;
+
+const HelpIcon = styled(HelpOutlineIcon)`
+  cursor: pointer;
+  :hover {
+    color: #ee254f;
   }
 `;
 
